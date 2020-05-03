@@ -1,0 +1,51 @@
+/* 头部搜索框样式 */
+.search {
+    display: flex;
+    flex: 74%;
+  }
+  .search_t {
+    flex: 100%;
+    padding: 0px 5px;
+    /* margin: auto; */
+  }
+  .search_t div {
+    padding: 0px 5px;
+  }
+  .Top {
+    width: 100%;
+    display: flex;
+    position: fixed;
+    top: 0px;
+    padding: 5px 0px;
+  }
+  /* 用户样式 */
+  .user {
+    display: flex;
+    flex: 12%;
+  }
+  .user_img {
+    margin: auto;
+    height: 30px;
+    width: 30px;
+    display: flex;
+  }
+  
+  /* 图标样式 */
+  .icon {
+    display: flex;
+    flex: 14%;
+  }
+  .icon div {
+    margin: auto;
+  }
+  /* 底部样式 */
+  /* 遮罩层样式 */
+.pop{
+    display: flex;
+}
+.pop_cont{
+    margin: auto;
+    width: 100%;
+    height: 500px;
+    background-color: black;
+}
