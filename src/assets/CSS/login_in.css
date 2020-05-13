@@ -1,0 +1,17 @@
+.login {
+    /* -webkit-transition: all .3s ease 0s ; */
+    padding-bottom: 20px;
+  }
+  .active {
+    display: block;
+  }
+  /* 按钮样式 */
+  .button {
+    display: flex;
+  }
+  .button button {
+    margin: 15px;
+  }
+  .success{
+    transform: scale(2) important; 
+  }

@@ -11,6 +11,11 @@ import mine from "../components/index/mine"
 
 // 引入登录组件
 import  login from "../components/login/login"
+// 用户登录子组件
+import login_in from "../components/login/login_in"
+// 用户注册子组件
+import res from "../components/login/res"
+
 Vue.use(VueRouter);
 /**
  *  解决跳转相同路由报错 重写路由的push方法--->这个是vue-cli4.x以上的坑，不然的话，你是跳转不了的
@@ -54,7 +59,18 @@ const routes = [
   // 登录组件
   {
     path:'/login',
-    component:login
+    component:login,
+    children:[
+      {
+        path:'login_in',
+        component:login_in
+      },
+      {
+        path:'res',
+        component:res
+      }
+    ]
+
   },
   {
     path:'/index',component:index,

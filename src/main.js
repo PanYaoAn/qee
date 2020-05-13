@@ -4,9 +4,18 @@ import router from "./router";
 import store from "./store";
 import Button from 'vant/lib/button';
 import 'vant/lib/button/style';
+import axios from 'axios';
+// 导入cookie
 
-
-
+// Vue.prototype.$axios = axios;
+Vue.prototype.$http=axios
+// 引入jsonp 解决跨域问题
+import VueJsonp from 'vue-jsonp'
+Vue.use(VueJsonp);
+Vue.prototype.HOST = '/api'
+// 引入vue-resource
+import VueResource from 'vue-resource';
+Vue.use(VueResource)
 // 引入 Tabbar标签栏
 import {Tabbar,TabbarItem} from 'vant';
 Vue.use(Tabbar);
@@ -30,12 +39,24 @@ Vue.use(CellGroup)
 // 引入表单的输入框组件
 import {Field} from 'vant';
 Vue.use(Field)
-
+import { Form } from 'vant';
+Vue.use(Form)
 Vue.use(Button)
-
-
+// 引入单选款
+import {RadioGroup,Radio} from 'vant'
+Vue.use(Radio);
+Vue.use(RadioGroup);
+// 引入复选框
+import { Checkbox, CheckboxGroup } from 'vant';
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+// 引入提示框
+import { Toast } from 'vant';
+Vue.use(Toast);
 Vue.config.productionTip = false;
-
+// Notify消息提示
+import {Notify} from 'vant'
+Vue.use(Notify)
 router.beforeEach((to,from,next) =>{
   if(to.meta.title){
     document.title = to.meta.title

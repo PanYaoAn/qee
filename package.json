@@ -9,9 +9,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "cookie": "^0.4.1",
+    "cookie-parser": "^1.4.5",
+    "cookie_js": "^1.4.0",
     "core-js": "^3.6.4",
+    "express": "^4.17.1",
+    "js": "^0.1.0",
+    "mysql": "^2.18.1",
     "vant": "^2.7.1",
     "vue": "^2.6.11",
+    "vue-jsonp": "^0.1.8",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.1.6",
     "vuex": "^3.3.0"
   },
@@ -30,6 +39,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.2.2",
+    "postcss-pxtorem": "^5.1.1",
     "prettier": "^1.19.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",

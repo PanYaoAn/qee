@@ -8,7 +8,7 @@
     padding: 0px 5px;
     /* margin: auto; */
   }
-  .search_t div {
+  .search_t div:nth-child(1){
     padding: 0px 5px;
   }
   .Top {

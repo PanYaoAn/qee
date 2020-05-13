@@ -4,22 +4,23 @@
       <div class="close" @click="back">
         <van-icon name="cross" />
       </div>
-
       <div class="pop_cont_t">
         <main class="cont_t">
           <div class="log_cont">
             <!-- 登录后 -->
-            <div class="user_mess" v-if="this.$store.state.count == 0">
+            <div class="user_mess" v-if="this.$store.state.user_id == 1">
               <van-image class="user_pic" width="50" height="50" src round />
               <div class="user_naem">
-                <span>{{user.user_name}}</span>
+                <span>{{user.username}}</span>
+                <!-- <span>{{user.phone}}</span> -->
               </div>
             </div>
+
             <!-- 未登录 -->
-            <div class="log">
+            <div class="log" v-if="this.$store.state.user_id == -1">
               <h4>欢迎来来到企鹅视频</h4>
 
-              <van-cell  class="but" @click="showPopup">
+              <van-cell class="but" @click="showPopup">
                 <van-button type="primary" size="small">
                   <span>登录/注册</span>
                 </van-button>
@@ -33,28 +34,46 @@
         </main>
       </div>
     </div>
-    <!-- 登录页面 -->
-    <van-popup v-model="show"
-    position="bottom" 
-    :style="{height:'50%'}"
-    round>
-        <div class="login">
-            <h4>请输入账号</h4>
-        </div>
+    <van-popup v-model="show" position="bottom" round>
+      <!-- 登录页面子组件 -->
+      <login_in class="login active" :class="[active ? 'active' : 'hide']" @passparents="parent"></login_in>
+      <!-- 注册子组件 -->
+      <res @childern="parent1" class="res active" :class="[active ? 'hide' : 'active']"></res>
     </van-popup>
   </div>
 </template>
 <script>
+//引用axios
+// import axios from "axios";
+// 引用子组件
+import login_in from "./login_in";
+import res from "./res";
+import Axios from "axios";
 export default {
   data() {
     return {
-      show: true,
+      checked: true,
+      show: this.$store.state.user_id == -1,
+      // 显示登录注册的添加
+      active: true,
       // 用户信息
       user: {
-        user_name: "亲登录",
-        user_id: ""
+        username: "",
+        phone: "",
+        userid: ""
+      },
+      // 用户注册信息
+      res: {
+        username: "",
+        password: "",
+        phone: ""
       }
     };
+  },
+  // 注册子组件
+  components: {
+    login_in,
+    res
   },
   methods: {
     back() {
@@ -64,59 +83,58 @@ export default {
       console.log(11111);
       this.show = true;
     },
-   
+    // d第一个组件传回来的值
+    parent(data) {
+      if (typeof data == "object") {
+        this.user = data;
+        this.show = false;
+        console.log(this.user);
+      } else if (typeof data == "boolean") {
+        this.active = data;
+      }
+    },
+    // 第二个组件传回来的值
+    parent1(data) {
+      this.active = data;
+      console.log("第二个" + this.active);
+    },
+    // 为了记录用户登录状态将请求的数据用cookie存储
+    getUser_id(user_id) {
+      console.log(user_id);
+      if (user_id == -1) {
+        console.log("用户未登录");
+        return;
+      } else {
+        Axios.get("http://192.168.1.167:8081/login", {
+          params: {
+            id: user_id
+          }
+        })
+          .then(res => {
+            let user = {
+              username: res.data[0].name,
+              phone: res.data[0].phone,
+              userid: res.data[0].id
+            };
+            this.user = user
+            console.log(res.data[0].id);
+
+            console.log(this.user);
+         
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    }
+  },
+  mounted() {
+    console.log(this.$store.state.status);
+    // console.log(this.$store.state.user_id)
+    this.getUser_id(this.$store.state.user_id);
   }
 };
 </script>
 <style scoped>
-.content {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-}
-.pop {
-  display: flex;
-}
-.pop_cont_t {
-  display: flex;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  background-color: #dfdfdf;
-}
-/* 关闭遮罩层按钮样式*/
-.close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 25px;
-}
-.cont_t {
-  width: 100%;
-  /* height: 100%; */
-  padding: 15px;
-  text-align: left;
-}
-/* 登录前的样式 */
-.log_cont {
-  /* height: 100%; */
-  width: 100%;
-  background: #ffffff;
-  display: flex;
-}
-.log {
-}
-.but{
-    padding: 0px;
-}
-/* 登录后的样式 */
-.user_mess {
-  /* display: flex; */
-  padding: 15px 0;
-  background-color: #ffffff;
-}
-.user_naem {
-  padding: 5px 0;
-}
+@import "~@/assets/CSS/login.css";
 </style>

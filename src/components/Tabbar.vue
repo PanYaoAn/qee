@@ -16,7 +16,7 @@
       active-color="#ca8888"
       inactive-color="#6b2121"
       class="tabbar" :class="currIndex  == active ? active : '' "
-   
+      v-show="isShow"
     >
       <van-tabbar-item
         v-for="(item,index) in tabbar"
@@ -69,6 +69,10 @@ export default {
   name: "Tabbar",
   data() {
     return {
+      // 键盘弹起隐藏底部
+      isShow:true,
+      domHeight:document.documentElement.clientHeight,//默认屏幕高度
+      showHeight:document.documentElement.clientHeight,//实时屏幕高度
       // 动画名
       transitionName:'slide-right',
       // 搜索数据
@@ -129,7 +133,15 @@ export default {
     }
   },
   watch:{
+    // 实时监听屏幕高度
+    showHeight(){
+      if(this.domHeight > this.showHeight){
+        this.isShow = false
 
+      }else{
+        this.isShow = true
+      }
+    }
   },
   
   // 生命函数
@@ -137,62 +149,20 @@ export default {
     this.plc();
   },
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    window.onresize = ()=>{
+     return(()=>{
+       this.showHeight = document.documentElement.clientHeight || document.body.clientHeight;
+   })()
+   }
+  },
   beforeUpdate() {},
   updated() {}
 };
 </script>
 <style scoped>
+@import '~@/assets/CSS/Tabbar.css';
 
 
-/* 头部搜索框样式 */
-.search {
-    display: flex;
-    flex: 74%;
-  }
-  .search_t {
-    flex: 100%;
-    padding: 0px 5px;
-    /* margin: auto; */
-  }
-  .search_t div {
-    padding: 0px 5px;
-  }
-  .Top {
-    width: 100%;
-    display: flex;
-    position: fixed;
-    top: 0px;
-    padding: 5px 0px;
-  }
-  /* 用户样式 */
-  .user {
-    display: flex;
-    flex: 12%;
-    padding: 0px;
-  }
-  .user div{
-    padding: 0px;
-  }
-  .user_img {
-    margin: auto;
-    height: 30px;
-    width: 30px;
-    display: flex;
-  }
-  
-  /* 图标样式 */
-  .icon {
-    display: flex;
-    flex: 14%;
-  }
-  .icon div {
-    margin: auto;
-  }
-  /* 底部样式 */
-  .active{
-    color: blueviolet;
-  }
-  /* 遮罩层样式 */
 
 </style>
