@@ -9,8 +9,16 @@
           <div class="log_cont">
             <!-- 登录后 -->
             <div class="user_mess" v-if="this.$store.state.user_id == 1">
-              <van-image class="user_pic" width="50" height="50" src round />
-              <div class="user_naem">
+              <!-- 文件上传 -->
+              <van-uploader class="user_pic"  v-model="user.url" multiple="" 
+              :deletable=false
+              :max-count="1"
+              :after-read="afterRead"
+              >
+                <!-- <van-image class="user_pic" width="50" height="50" src round /> -->
+              </van-uploader>
+
+              <div class="user_naem" @click="dian">
                 <span>{{user.username}}</span>
                 <!-- <span>{{user.phone}}</span> -->
               </div>
@@ -60,14 +68,17 @@ export default {
       user: {
         username: "",
         phone: "",
-        userid: ""
+        userid: "",
+        url:'',
       },
       // 用户注册信息
       res: {
         username: "",
         password: "",
-        phone: ""
-      }
+        phone: "",
+        
+      },
+
     };
   },
   // 注册子组件
@@ -116,16 +127,22 @@ export default {
               phone: res.data[0].phone,
               userid: res.data[0].id
             };
-            this.user = user
+            this.user = user;
             console.log(res.data[0].id);
 
             console.log(this.user);
-         
           })
           .catch(err => {
             console.log(err);
           });
       }
+    },
+    // 上传用户文件方法
+    afterRead(file){
+      console.log(file.content)
+    },
+    dian(){
+      // console.log(this.user.)
     }
   },
   mounted() {

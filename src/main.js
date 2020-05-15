@@ -63,6 +63,9 @@ router.beforeEach((to,from,next) =>{
   }
   next()
 });
+// 引入Uploader 文件上传
+import {Uploader} from 'vant';
+Vue.use(Uploader)
 
 
 new Vue({
