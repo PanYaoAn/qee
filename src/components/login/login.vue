@@ -10,16 +10,30 @@
             <!-- 登录后 -->
             <div class="user_mess" v-if="this.$store.state.user_id == 1">
               <!-- 文件上传 -->
+<<<<<<< HEAD
               <van-uploader class="user_pic"  v-model="user.url" multiple="" 
               :deletable=false
               :max-count="1"
               :after-read="afterRead"
+=======
+              <van-uploader class="user_pic"  v-model="fileList" multiple
+              :deletable=false
+              :max-count="1"
+              :after-read="afterRead"
+              name="head"
+>>>>>>> f9e38db... 2020-5-23
               >
                 <!-- <van-image class="user_pic" width="50" height="50" src round /> -->
               </van-uploader>
 
+<<<<<<< HEAD
               <div class="user_naem" @click="dian">
                 <span>{{user.username}}</span>
+=======
+              <div class="user_name" @click="dian">
+                <p><span>用户名</span> {{user.username}}</p>
+                <p>收藏量</p>
+>>>>>>> f9e38db... 2020-5-23
                 <!-- <span>{{user.phone}}</span> -->
               </div>
             </div>
@@ -35,9 +49,10 @@
               </van-cell>
             </div>
           </div>
-          <div>
-            <span>会员中心</span>
-            <span>日期</span>
+          <div class="contain">
+       
+            <van-cell class="set" title="个人中心" icon="setting-o" is-link to="index" />
+            <van-cell class="set" title="我的收藏" icon="like-o" is-link to="index" />
           </div>
         </main>
       </div>
@@ -69,7 +84,11 @@ export default {
         username: "",
         phone: "",
         userid: "",
+<<<<<<< HEAD
         url:'',
+=======
+        url:[],
+>>>>>>> f9e38db... 2020-5-23
       },
       // 用户注册信息
       res: {
@@ -78,6 +97,12 @@ export default {
         phone: "",
         
       },
+<<<<<<< HEAD
+=======
+      fileList:[
+     
+      ],
+>>>>>>> f9e38db... 2020-5-23
 
     };
   },
@@ -111,11 +136,12 @@ export default {
     },
     // 为了记录用户登录状态将请求的数据用cookie存储
     getUser_id(user_id) {
-      console.log(user_id);
+      // console.log(user_id);
       if (user_id == -1) {
         console.log("用户未登录");
         return;
       } else {
+        // console.log(1111111111111)
         Axios.get("http://192.168.1.167:8081/login", {
           params: {
             id: user_id
@@ -128,7 +154,11 @@ export default {
               userid: res.data[0].id
             };
             this.user = user;
+<<<<<<< HEAD
             console.log(res.data[0].id);
+=======
+            // console.log(res.data[0].id);
+>>>>>>> f9e38db... 2020-5-23
 
             console.log(this.user);
           })
@@ -139,16 +169,50 @@ export default {
     },
     // 上传用户文件方法
     afterRead(file){
+<<<<<<< HEAD
       console.log(file.content)
+    },
+    dian(){
+      // console.log(this.user.)
+=======
+      console.log(file.file)
+
+     
+      // console.log(this.fileList);
+      // let content = file.file;
+    //   let data = new FormData();
+    //  let date =   data.append('img',content)
+      // Axios.post('http://192.168.1.167:8081/login',file).then((res)=>{
+      //   console.log(res)
+      // }).catch((err)=>{
+      //   console.log(err)
+      // });
+      // let formData = new For
+      // Axios.post("http://192.168.1.167:8081/login",file.file).then((res)=>{
+      //   console.log(res)
+      // }).catch((err)=>{
+      //   console.log(err)
+      // });
     },
     dian(){
       // console.log(this.user.)
     }
   },
+  watch:{
+    $route(to){
+      console.log(to.path)
+>>>>>>> f9e38db... 2020-5-23
+    }
+  },
   mounted() {
-    console.log(this.$store.state.status);
+    // console.log(this.$store.state.status);
     // console.log(this.$store.state.user_id)
     this.getUser_id(this.$store.state.user_id);
+  },
+  updated(){
+    // console.log(2222222222)
+    //  this.getUser_id(this.$store.state.user_id);
+      // this.getUser_id(this.$store.state.user_id);
   }
 };
 </script>

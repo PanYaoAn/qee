@@ -49,7 +49,13 @@ exports.checkid = (data,fun)=>{
         }
         fun(res);
     })
-}
+};
+// =====================================用户上传图片
+// exports.addusers = (data,fun)=>{
+//     let url = data 
+//     let sql = 'insert in user (url) values (?)';
+//     let parmas = [data.user]
+// };
 // ===================================查询用户名是否被注册
 exports.checkname = function(data,fun){
     console.log(data.name);

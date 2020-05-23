@@ -11,8 +11,8 @@ export default new Vuex.Store({
     status: JSON.parse(sessionStorage.getItem('status')) || false,
     // ,
     // JSON.parse(Cookie.get('user_id')) 
-      user_id: sessionStorage.getItem('user_id') || -1
-
+    user_id: sessionStorage.getItem('user_id') || -1,
+    // user_url: JSON.parse( sessionStorage.getItem('user_url')) || []
 
   },
   getters: {
@@ -31,7 +31,13 @@ export default new Vuex.Store({
     // Cookie.set('user_id',JSON.stringify(state.user_id))
     sessionStorage.setItem('user_id',state.user_id)
     console.log( JSON.parse(Cookie.get('user_id')))
-  }
+  },
+  // 记录用户图片
+  // SET_UserPic(state,user_url){
+  //   console.log(user_url)
+  //   state.user_url = user_url
+  //   sessionStorage.setItem('user_url',JSON.stringify(state.user_url))
+  // }
   },
   actions: {},
 });

@@ -7,7 +7,11 @@ var router = express.Router();
 let app = express();
 let sql = require('../SQL/sql');
 // let cookieParser = require('cookie-parser');
-// app.use(cookieParser());
+
+let fs = require("fs");
+
+
+
 // 引入cookie
 let cookieParser = require('cookie-parser')
 // 使用cookie中间键
@@ -60,6 +64,10 @@ app.get('/login',(req,res)=>{
         res.send(result);
     })
 });
+// ===========================================用户图片
+// app.post("/login",singleMidle,(req,res,next)=>{
+//    console.log(req.file)
+// });
 // ========================================接受用户注册
 app.post('/login/res', function (req, res) {
     let post = '';

@@ -108,6 +108,7 @@ export default {
                   this.$toast.success("注册成功");
                   this.active = true;
                   this.$emit("childern", this.active);
+                   this.$store.commit("SET_Status");
                 }
               })
               .catch(res => {

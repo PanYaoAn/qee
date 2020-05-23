@@ -14,9 +14,11 @@
   .Top {
     width: 100%;
     display: flex;
-    position: fixed;
+    /* position: fixed; */
     top: 0px;
     padding: 5px 0px;
+    z-index: 100;
+    background: #fff;
   }
   /* 用户样式 */
   .user {
