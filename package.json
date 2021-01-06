@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cookie": "^0.4.1",
     "cookie-parser": "^1.4.5",
     "cookie_js": "^1.4.0",
